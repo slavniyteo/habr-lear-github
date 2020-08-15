@@ -1,3 +1,9 @@
 [submodule "poetry"]
 	path = poetry
 	url = https://github.com/slavniyteo/habr-lear-github-poetry
+[submodule "buterin"]
+	path = buterin
+	url = https://github.com/vbuterin/pybitcointools
+[submodule "torvalds"]
+	path = torvalds
+	url = https://github.com/torvalds/pesconvert
