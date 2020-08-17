@@ -10,3 +10,6 @@
 [submodule "stroustrup"]
 	path = stroustrup
 	url = https://github.com/isocpp/CppCoreGuidelines
+[submodule "gregg"]
+	path = gregg
+	url = https://github.com/brendangregg/msr-cloud-tools/
