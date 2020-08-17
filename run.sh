@@ -6,6 +6,7 @@ set -eu
 
 cd poetry
 FILE="${1:-../poem.txt}"
+OUT_FILE="README.md"
 
 ################################################################################
 
@@ -26,8 +27,8 @@ commit () {
   local LINE="$2"
   local AUTHOR_EMAIL="${AUTHOR_EMAILS["$AUTHOR"]}"
 
-  echo "$LINE" | cat - result.txt > temp
-  mv temp result.txt
+  echo "$LINE" | cat - "$OUT_FILE" > temp
+  mv temp "$OUT_FILE"
 
   git add -A
 
