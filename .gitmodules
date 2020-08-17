@@ -7,3 +7,6 @@
 [submodule "torvalds"]
 	path = torvalds
 	url = https://github.com/torvalds/pesconvert
+[submodule "stroustrup"]
+	path = stroustrup
+	url = https://github.com/isocpp/CppCoreGuidelines
