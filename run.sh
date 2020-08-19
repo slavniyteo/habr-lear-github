@@ -4,28 +4,33 @@ set -eu
 
 ################################################################################
 
-cd poetry
-FILE="${1:-../poem.txt}"
-OUT_FILE="README.md"
+export GIT_DIR="./poetry/.git"
+export GIT_WORK_TREE="./poetry"
+FILE="${1:-./poem.txt}"
+OUT_FILE="./poetry/README.md"
 
 ################################################################################
 
-declare -a AUTHORS=( "Linus Torvalds" "Vitalik Buterin" "Ivan Vasilev" )
-declare -A AUTHOR_EMAILS=( )
-AUTHOR_EMAILS["Linus Torvalds"]=torvalds@linux-foundation.org
-AUTHOR_EMAILS["Vitalik Buterin"]=v@buterin.com
-AUTHOR_EMAILS["Ivan Vasilev"]=slavniyteo@gmail.com
+declare -A AUTHORS=( )
+AUTHORS["Linus Torvalds"]=torvalds@linux-foundation.org
+AUTHORS["Vitalik Buterin"]=v@buterin.com
+AUTHORS["Bjarne Stroustrup"]=bjarne@stroustrup.com
+AUTHORS["Brendan Gregg"]=brendan.d.gregg@gmail.com
+AUTHORS["Guido van Rossum"]=guido@python.org
+AUTHORS["Ivan Vasilev"]=slavniyteo@gmail.com
+
+declare -a AUTHOR_NAMES=( "${!AUTHORS[@]}" )
 
 get-next-author-name() {
   GLOBAL_AUTHOR_INDEX="$1"
-  AUTHOR_INDEX="$(($GLOBAL_AUTHOR_INDEX % "${#AUTHORS[@]}"))"
-  echo "${AUTHORS["$AUTHOR_INDEX"]}"
+  AUTHOR_INDEX="$(($GLOBAL_AUTHOR_INDEX % "${#AUTHOR_NAMES[@]}"))"
+  echo "${AUTHOR_NAMES["$AUTHOR_INDEX"]}"
 }
 
 commit () {
   local AUTHOR="$1"
   local LINE="$2"
-  local AUTHOR_EMAIL="${AUTHOR_EMAILS["$AUTHOR"]}"
+  local AUTHOR_EMAIL="${AUTHORS["$AUTHOR"]}"
 
   echo "$LINE" | cat - "$OUT_FILE" > temp
   mv temp "$OUT_FILE"
