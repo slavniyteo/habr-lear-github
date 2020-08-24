@@ -1,6 +1,6 @@
 [submodule "poetry"]
 	path = poetry
-	url = https://github.com/slavniyteo/habr-lear-github-poetry
+	url = https://github.com/slavniyteo/upgraded-octo-funicular
 [submodule "buterin"]
 	path = buterin
 	url = https://github.com/vbuterin/pybitcointools
