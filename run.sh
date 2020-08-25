@@ -77,7 +77,7 @@ commit-one-line() {
 ########## Основной цикл #######################################################
 
 LINE_IDX=0
-while IFS= read LINE; do
+while IFS= read -r LINE; do
     LINE_IDX="$((LINE_IDX + 1))"
     AUTHOR="$(get-next-author-name "$LINE_IDX")"
 
