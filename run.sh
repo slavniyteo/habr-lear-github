@@ -8,7 +8,8 @@ set -eu
 
 FILE="${1:-./poem.txt}"
 OUT_DIR="${2:-./poetry}"
-OUT_FILE="${OUT_DIR}/README.md"
+OUT_FILE_NAME="README.md"
+OUT_FILE="${OUT_DIR}/${OUT_FILE_NAME}"
 
 export GIT_DIR="${OUT_DIR}/.git"
 export GIT_WORK_TREE="$OUT_DIR"
@@ -64,18 +65,13 @@ commit-one-line() {
     echo "$LINE" | cat - "$OUT_FILE" > temp
     mv temp "$OUT_FILE"
 
-    git add -A
-
-    git config --local user.name "$AUTHOR"
-    git config --local user.email "$AUTHOR_EMAIL"
+    git add "$OUT_FILE_NAME"
 
     # Добавляем '| ' в начало, 
     # чтобы избежать проблем с пустым сообщением коммита
-    git commit -m "| $LINE"
-
-    # Избавляемся от сайд-эффектов функции
-    git config --local --unset user.name
-    git config --local --unset user.email
+    git -c user.name="$AUTHOR" \
+        -c user.email="$AUTHOR_EMAIL" \
+        commit -m "| $LINE"
 }
 
 ########## Основной цикл #######################################################
